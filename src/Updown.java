@@ -19,10 +19,16 @@ public class Updown {
 
             iTrial = Integer.parseInt(sInput);
 
-            if (iAnswer == iTrial)
+            if (iAnswer == iTrial) {
                 System.out.println("Correct");
-            else
-                System.out.println("Wrong");
+                break;
+            }
+            else if(i==5)
+                System.out.printf("Wrong!\nAnswer is: %d\n", iAnswer);
+            else if (iAnswer < iTrial)
+                System.out.println("Down");
+            else if (iAnswer > iTrial)
+                System.out.println("Up");
         }
     }
 }
