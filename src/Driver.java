@@ -6,9 +6,8 @@ public class Driver{
             else {
                 Sum sumObject = new Sum();
                 int upper = Integer.parseInt(args[0]);
-                Summation sumt = new Summation(upper, sumObject);
-                Thread thrd = new Thread(sumt);
-                Thread thrd2 = new Thread(sumt);
+                Thread thrd = new Thread(new Summation(upper, sumObject));
+                Thread thrd2 = new Thread(new Summation(upper, sumObject));
                 thrd.start();
                 thrd2.start();
                 try {
@@ -35,29 +34,25 @@ class Sum {
     public void setSum(int sum){
         this.sum = sum;
     }
+
+    public synchronized void addSum(int add){
+        sum += add;
+    }
 }
 
 class Summation implements Runnable{
     private int upper;
-    private boolean available;
     private Sum sumValue;
 
     public Summation(int upper, Sum sumValue){
         this.upper = upper;
         this.sumValue =sumValue;
-        available = true;
     }
 
     @Override
     public void run() {
-
-        //while (!available);
-        //available = false;
-        int sum = sumValue.getSum();
         for (int i=0; i<= upper; i++)
-            sum += i;
-        sumValue.setSum(sum);
-        //available = true;
+            sumValue.addSum(i);
     }
 }
 
