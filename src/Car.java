@@ -21,15 +21,43 @@ public class Car {
     }
 
     public static void main(String[] args) {
-        Taxi taxi = new Taxi();
+        Car taxi = new Taxi("Seokjun"); // Up Casting
+        Car notTaxi = new Car("Truck", 3);
 
-        taxi.prtName();
-        taxi.move(17.5);
+        Taxi taxi2 = new Taxi(); // Down Casting
+
+        if(taxi instanceof Taxi)
+            taxi2 =(Taxi) taxi;
+
+        if(notTaxi instanceof Taxi)
+            taxi2 =(Taxi) notTaxi;
+
+        taxi2.prtName();
+        taxi2.prtPassName();
+        taxi2.move(17.5);
     }
 }
 
 class Taxi extends Car{
+    String passenger;
+
     Taxi(){
         super("Taxi", 4);
+        passenger = new String();
     }
+
+    Taxi(String passenger){
+        super("Taxi", 4);
+        this.passenger = passenger;
+    }
+
+    public void prtPassName(){
+        System.out.println("Passenger:" + passenger);
+    }
+
+    public void prtName(){
+        System.out.println("Taxi's name is " + name);
+    }
+
+
 }
